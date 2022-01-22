@@ -1,54 +1,39 @@
 ![logo](assets/logo.png)
 
-Design a simple and expressive logo with the same model you see above,
-the logo design helps to unify the visual identity and further develop the optimal packages to increase the quality of the software we develop
+# Laravel Query Helper
 
-#NOTES:
-* You should replace all your dependencies into your custom names and files including:
-  * vendor namespace.
-  * composer information.
-  * logo
-  * credit and contributors links
-  * security email
-* To use this template, please click on button above "Use this template".  
-* Delete this section after you have finished developing your package
-# Package Name
-Your package description,Try to be briefly describing the features of the package,
-which versions of Laravel and php it require,
-and if there are external resources for learning or explanation
+Laravel Query Helper was developed for [laravel 7.2+](http://laravel.com/) to help you optimize
+sql queries, this package will contain all advanced SQL queries to Help us write better and faster queries and clean code.
 
+Installation
+------------
 ##### 1 - Dependency
 The first step is using composer to install the package and automatically update your composer.json file, you can do this by running:
-
 ```shell
-composer require vendor_name/package_name
+composer require kmlaravel/laravel-query-helper
 ```
 ##### 2 - Copy the package providers to your local config with the publish command, this will publish the config:
-
-Replace this command with your install command,
-The package must contain an installation command even if it does not do anything,
-this helps with maintenance in the future.
-
 ```shell
-php artisan package:install
+php artisan query-helper:install
 ```
 
 Features
 -----------
-Put the name of the feature and a link to this feature
-- [Any feature](https://github.com/syrian-open-source/laravel-package-template/blob/main/docs/feature.md#usage)
-
+- [Update Helper](https://github.com/Syrian-Open-Source/laravel-query-helper/blob/main/docs/update.md)
+- [Delete Helper](https://github.com/Syrian-Open-Source/laravel-query-helper/blob/main/docs/delete.md)
+- [Insert Helper](https://github.com/Syrian-Open-Source/laravel-query-helper/blob/main/docs/insert.md)
+- [Join Helper](https://github.com/Syrian-Open-Source/laravel-query-helper/blob/main/docs/join.md)
+- [Optimizing Helper](https://github.com/Syrian-Open-Source/laravel-query-helper/blob/main/docs/optimizing.md)
 
 Changelog
 ---------
-Please see the [CHANGELOG](https://github.com/syrian-open-source/laravel-package-template/blob/master/CHANGELOG.md) for more information about what has changed or updated or added recently.
+Please see the [CHANGELOG](https://github.com/Syrian-Open-Source/laravel-query-helper/blob/main/CHANGELOG.md) for more information about what has changed or updated or added recently.
 
 Security
 --------
-If you discover any security related issues, please email them first to "your email", 
-if we do not fix it within a short period of time please open a new issue describing your problem. 
+If you discover any security related issues, please email them first to karam2mustafa@gmail.com, 
+if we do not fix it within a short period of time please open a new issue describe your problem. 
 
 Credits
 -------
-* [your email](https://github.com/syrian-open-source/laravel-package-template/graphs/contributors)
-* [All contributors](https://github.com/syrian-open-source/laravel-package-template/graphs/contributors)
+[karam mustafa](https://www.linkedin.com/in/karam2mustafa)

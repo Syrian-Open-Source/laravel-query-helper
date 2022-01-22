@@ -1,10 +1,12 @@
 {
-    "name": "syrian-open-source/laravel-package-template",
+    "name": "syrian-open-source/laravel-query-helper",
     "description": "Package description",
     "license": "MIT",
     "keywords": [
         "laravel",
-        "syrian open source"
+        "syrian open source",
+        "laravel query helper",
+        "laravel-query-helper"
     ],
     "authors": [
         {
@@ -20,8 +22,8 @@
     },
     "autoload" : {
         "psr-4": {
-            "SOS\\LaravelPackageTemplate\\" : "src",
-            "SOS\\LaravelPackageTemplate\\Tests\\": "src/tests"
+            "SOS\\QueryHelper\\" : "src",
+            "SOS\\QueryHelper\\Tests\\": "src/tests"
         }
     },
     "scripts": {
@@ -32,7 +34,7 @@
     "extra" : {
         "laravel" : {
             "providers" : [
-                "SOS\\LaravelPackageTemplate\\Providers\\LaravelPackageTemplateServiceProviders"
+                "SOS\\QueryHelper\\Providers\\QueryHelperServiceProviders"
             ]
         }
     },

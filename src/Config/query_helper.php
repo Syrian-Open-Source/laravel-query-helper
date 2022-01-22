@@ -4,12 +4,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | name of this config
+    | chunk value
     |--------------------------------------------------------------------------
-    | description of this config.
-    | description of this config.
-    | description of this config.
-    | description of this config.
+    |
+    |
     */
 
+    'allowed_chunk_number' => 50000,
 ];

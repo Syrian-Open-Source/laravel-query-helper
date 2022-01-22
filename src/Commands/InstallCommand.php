@@ -1,26 +1,30 @@
 <?php
 
-namespace SOS\LaravelPackageTemplate\Commands;
+
+namespace SOS\QueryHelper\Commands;
+
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class InstallCommand extends Command
 {
-    public $packageLink = '';
+
+    public $packageLink = 'https://github.com/karam-mustafa/laravel-query-helper';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'package:install';
+    protected $signature = 'query-helper:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'install all package dependencies';
+    protected $description = 'install all laravel-query-helper package dependencies';
 
     /**
      * Create a new command instance.
@@ -39,8 +43,8 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-
-        // write some executions
+        Artisan::call('vendor:publish --provider="SOS\\SOS\QueryHelper\Facade\QueryHelperFacade\Providers\\SOS\QueryHelper\Facade\QueryHelperFacadeServiceProviders"');
+        Artisan::call('vendor:publish --tag=query-helper-config');
 
         $this->info('<info> Install the dependencies was success</info>');
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SOS\LaravelPackageTemplate\Tests;
+namespace SOS\QueryHelper\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 

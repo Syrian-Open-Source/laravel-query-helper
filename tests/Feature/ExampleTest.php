@@ -1,8 +1,8 @@
 <?php
 
-namespace SOS\LaravelPackageTemplate\Tests\Feature;
+namespace SOS\QueryHelper\Tests\Feature;
 
-use SOS\LaravelPackageTemplate\Tests\BaseTest;
+use SOS\QueryHelper\Tests\BaseTest;
 
 class ExampleTest extends BaseTest
 {
