@@ -75,6 +75,7 @@ class JoinHelper extends BaseHelper
                 $this->getTableName(),
                 $this->getQuery()
             ));
+
         // change the selection status to isSelectStatus,
         // so we can execute this query as a raw statement.
         $this->setIsSelectStatus();
@@ -119,11 +120,14 @@ class JoinHelper extends BaseHelper
     public function fastJoin($mainTableName, $selection, $tables, $joinTypes = 'JOIN')
     {
         $tables = !is_array($tables) ? [$tables] : $tables;
+
         // this is a important step if the user has been execute multi fastJoin
         // because the clearAll function clear the default field.
         $this->setField('id');
+
         // build the join query
         $this->buildFastJoin($mainTableName, $selection, $tables, $joinTypes);
+
         // clear all parameter's, except the saved items.
         $this->clearAll();
         
@@ -137,6 +141,7 @@ class JoinHelper extends BaseHelper
      *
      * @return JoinHelper
      * @author karam mustafa
+     *
      * @example if we have main table that inserted by the setTableName function
      * and lets say that table is users
      * and we want to add join with posts table
@@ -177,8 +182,10 @@ class JoinHelper extends BaseHelper
     private function buildFastJoin($mainTableName, $selection, $tables, $joinTypes): void
     {
         $this->loopThrough($tables, function ($index, $table) use ($joinTypes, $selection, $mainTableName) {
+
             // set random key with custom convention for a saved item.
             $savedKey = $mainTableName.'_'.Str::random('4');
+
             // push the query result on saved items property
             // this make us can handle multi query statement
             $this->setSavedItems([
