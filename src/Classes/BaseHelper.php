@@ -153,6 +153,7 @@ abstract class BaseHelper
         if (is_array($tables)) {
             $this->tables = array_merge($this->tables, $tables);
         }
+
         // if the parameter is string, then push this table name to the tables property.
         if (is_string($tables)) {
             array_push($this->tables, $tables);
@@ -309,11 +310,13 @@ abstract class BaseHelper
             if (isset($callback)) {
                 return $callback($this->getQuery());
             }
+
             // check if we are now in selection status
             // so we will execute this selection query.
             if ($this->isSelectStatus()) {
                 return DB::select(DB::raw($this->getQuery()));
             }
+
             // if we are not, then execute what evere this statement.
             DB::statement($this->getQuery());
 
@@ -325,7 +328,7 @@ abstract class BaseHelper
 
     /**
      * clear all inserted data in class properties.
-     * this function igore the savedDataItems property,
+     * this function ignore the savedDataItems property,
      * because this package designed to be a strong declarative concept,
      * and we want a node to store all the work on.
      *

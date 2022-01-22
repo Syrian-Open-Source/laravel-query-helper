@@ -21,10 +21,13 @@ class DeleteHelper extends BaseHelper
     public function dropMultiTables()
     {
         $tables = $this->tables;
+
         $query = "";
+
         foreach ($tables as $index => $table) {
             $query .= $index == 0 ? "`$table`" : ",`$table`";
         }
+
         $this->setQuery(sprintf("DROP TABLE %s;", $query));
 
         return $this;

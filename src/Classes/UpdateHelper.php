@@ -94,6 +94,7 @@ class UpdateHelper extends BaseHelper
     public function bindIdsWithValues()
     {
         $cases = [];
+
         foreach ($this->getIds() as $index => $id) {
             $val = $this->checkIfInteger($index)
                 // if the index is an integer, then we get the value.
