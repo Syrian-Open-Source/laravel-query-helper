@@ -1,6 +1,6 @@
 {
     "name": "syrian-open-source/laravel-query-helper",
-    "description": "Package description",
+    "description": "Laravel package making you able to perform several processes instead of executing them through one process",
     "license": "MIT",
     "keywords": [
         "laravel",
