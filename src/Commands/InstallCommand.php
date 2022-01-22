@@ -40,7 +40,7 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        Artisan::call('vendor:publish --provider="SOS\\SOS\QueryHelper\Facade\QueryHelperFacade\Providers\\SOS\QueryHelper\Facade\QueryHelperFacadeServiceProviders"');
+        Artisan::call('vendor:publish --provider="SOS\QueryHelper\Providers\QueryHelperServiceProviders"');
         Artisan::call('vendor:publish --tag=query-helper-config');
 
         $this->info('<info> Install the dependencies was success</info>');
