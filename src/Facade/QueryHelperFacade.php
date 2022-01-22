@@ -1,6 +1,5 @@
 <?php
 
-
 namespace SOS\QueryHelper\Facade;
 
 use Illuminate\Support\Facades\Facade;

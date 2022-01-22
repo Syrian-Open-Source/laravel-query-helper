@@ -1,8 +1,6 @@
 <?php
 
-
 namespace SOS\QueryHelper\Classes;
-
 
 /**
  * Class QueryHelper
@@ -44,10 +42,10 @@ class QueryHelper extends BaseHelper
     public function __construct()
     {
         $this->initContainer(
-            new UpdateHelper,
-            new DeleteHelper,
-            new InsertHelper,
-            new JoinHelper
+            new UpdateHelper(),
+            new DeleteHelper(),
+            new InsertHelper(),
+            new JoinHelper()
         );
         $this->setAllowedWhereInQueryNumber(config('query_helper.allowed_chunk_number'));
     }
@@ -114,5 +112,4 @@ class QueryHelper extends BaseHelper
         $this->insertHelper = $insertHelper;
         $this->joinHelper = $joinHelper;
     }
-
 }

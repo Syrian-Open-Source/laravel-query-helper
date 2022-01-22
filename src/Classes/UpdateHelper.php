@@ -1,12 +1,9 @@
 <?php
 
-
 namespace SOS\QueryHelper\Classes;
-
 
 class UpdateHelper extends BaseHelper
 {
-    
     /**
      * @var mixed
      */
@@ -29,6 +26,7 @@ class UpdateHelper extends BaseHelper
     public function setCases($cases)
     {
         $this->cases = $cases;
+
         return $this;
     }
 
@@ -52,7 +50,6 @@ class UpdateHelper extends BaseHelper
             $this->buildStatement()->executeAll();
 
             return $this;
-
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -83,7 +80,6 @@ class UpdateHelper extends BaseHelper
             $this->setQuery($query);
 
             return $this;
-
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -134,6 +130,7 @@ class UpdateHelper extends BaseHelper
             ->setField($column)
             ->bindIdsWithValues()
             ->executeUpdateMultiRows();
+
         return $this;
     }
 }

@@ -14,7 +14,6 @@ use SOS\QueryHelper\Commands\InstallCommand;
  */
 class QueryHelperServiceProviders extends ServiceProvider
 {
-
     /**
      *
      *
@@ -53,7 +52,7 @@ class QueryHelperServiceProviders extends ServiceProvider
     protected function publishesPackages()
     {
         $this->publishes([
-            __DIR__."/../Config/query_helper.php" => config_path("query_helper.php")
+            __DIR__."/../Config/query_helper.php" => config_path("query_helper.php"),
         ], "query-helper-config");
     }
 
@@ -70,5 +69,4 @@ class QueryHelperServiceProviders extends ServiceProvider
             ]);
         }
     }
-
 }

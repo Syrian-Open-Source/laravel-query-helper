@@ -1,8 +1,6 @@
 <?php
 
-
 namespace SOS\QueryHelper\Classes;
-
 
 use Illuminate\Support\Facades\DB;
 
@@ -53,11 +51,12 @@ abstract class BaseHelper
     public function setAllowedWhereInQueryNumber($allowedWhereInQueryNumber)
     {
         $this->allowedWhereInQueryNumber = $allowedWhereInQueryNumber;
+
         return $this;
     }
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $isSelectStatus = false;
 
@@ -100,7 +99,7 @@ abstract class BaseHelper
     }
 
     /**
-     * @param  boolean  $implode
+     * @param  bool  $implode
      *
      * @return string
      * @author karam mustaf
@@ -110,6 +109,7 @@ abstract class BaseHelper
         if ($implode) {
             return implode(',', $this->selection);
         }
+
         return $this->selection;
     }
 
@@ -195,6 +195,7 @@ abstract class BaseHelper
     public function setValues($values)
     {
         $this->values = $values;
+
         return $this;
     }
 
@@ -236,8 +237,8 @@ abstract class BaseHelper
     public function setIds($ids)
     {
         $this->ids = $ids;
-        return $this;
 
+        return $this;
     }
 
     /**
@@ -276,18 +277,19 @@ abstract class BaseHelper
      */
     public function checkIfQueryAllowed($ids, $callbackIfPassed = null, $chunkCountAllowed = null)
     {
-        if (!isset($chunckCountAllowed)) {
+        if (! isset($chunckCountAllowed)) {
             $chunkCountAllowed = $this->getAllowedWhereInQueryNumber();
         }
 
         $items = [];
         $lists = collect($ids)->chunk($chunkCountAllowed + 1);
-        if (!is_null($callbackIfPassed)) {
+        if (! is_null($callbackIfPassed)) {
             foreach ($lists as $index => $list) {
                 $items[] = $callbackIfPassed($list, $index);
             }
         }
         $this->savedItems = $items;
+
         return $items;
     }
 
@@ -362,7 +364,7 @@ abstract class BaseHelper
      * loop through specific array and each iteration will execute by a callback.
      *
      * @param  array  $arr
-     * @param  callback  $callback
+     * @param  callable  $callback
      *
      * @return void
      * @author karam mustafa
