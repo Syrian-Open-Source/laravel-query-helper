@@ -1,8 +1,6 @@
 <?php
 
-
 namespace SOS\QueryHelper\Classes;
-
 
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +12,6 @@ use Illuminate\Support\Facades\DB;
  */
 class DeleteHelper extends BaseHelper
 {
-
     /**
      * drop multiple tables by their names in the database
      *
