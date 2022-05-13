@@ -335,7 +335,7 @@ abstract class BaseHelper
                 return DB::select(DB::raw($this->getQuery()));
             }
 
-            // if we are not, then execute what evere this statement.
+            // otherwise, then execute what ever this statement.
             DB::statement($this->getQuery());
 
             return $this;
