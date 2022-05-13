@@ -34,6 +34,10 @@ abstract class BaseHelper
      * @var int
      */
     private $allowedWhereInQueryNumber = 0;
+    /**
+     * @var array
+     */
+    private $ignoredTables = ['migrations' , 'password_resets' , 'failed_jobs'];
 
     /**
      * @return int
@@ -163,6 +167,24 @@ abstract class BaseHelper
     }
 
     /**
+     * @return BaseHelper
+     */
+    public function setAllTablesFromDatabase()
+    {
+        $columnName = 'Tables_in_'.env('DB_DATABASE');
+
+        $this->loopThrough(
+            $this->getAllTablesFromDatabase()->getSavedItems(),
+            function ($key, $item) use ($columnName) {
+                if (!in_array($item->$columnName, $this->ignoredTables)) {
+                    $this->setTables($item->$columnName);
+                }
+            });
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getQuery()
@@ -176,6 +198,24 @@ abstract class BaseHelper
     protected function setQuery($query)
     {
         $this->query = $query;
+    }
+
+    /**
+     * @param  string  $query
+     */
+    protected function appendToQuery($query)
+    {
+        $this->query .= $query;
+    }
+
+    /**
+     * set the query string in the first of strings.
+     *
+     * @param  string  $query
+     */
+    protected function unshiftInQuery($query)
+    {
+        $this->query = $query." ".$this->query;
     }
 
     /**
@@ -278,13 +318,13 @@ abstract class BaseHelper
      */
     public function checkIfQueryAllowed($ids, $callbackIfPassed = null, $chunkCountAllowed = null)
     {
-        if (! isset($chunckCountAllowed)) {
+        if (!isset($chunckCountAllowed)) {
             $chunkCountAllowed = $this->getAllowedWhereInQueryNumber();
         }
 
         $items = [];
         $lists = collect($ids)->chunk($chunkCountAllowed + 1);
-        if (! is_null($callbackIfPassed)) {
+        if (!is_null($callbackIfPassed)) {
             foreach ($lists as $index => $list) {
                 $items[] = $callbackIfPassed($list, $index);
             }
@@ -317,10 +357,31 @@ abstract class BaseHelper
                 return DB::select(DB::raw($this->getQuery()));
             }
 
-            // if we are not, then execute what evere this statement.
+            // otherwise, then execute what ever this statement.
             DB::statement($this->getQuery());
 
             return $this;
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * execute query statements without preparing them, this will help us ignore the laravel query preparing.
+     *
+     * @return BaseHelper
+     * @throws \Exception
+     * @author karam mustafa
+     */
+    public function executeWithoutPrepare()
+    {
+        try {
+            $this->executeAll(function () {
+                DB::unprepared($this->getQuery());
+            });
+
+            return $this;
+
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -380,6 +441,25 @@ abstract class BaseHelper
     }
 
     /**
+     * loop through specific array and each iteration will execute by a callback.
+     *
+     * @param  callable  $callback
+     *
+     * @return void
+     * @author karam mustafa
+     */
+    protected function disableAndEnableForeignChecks($callback)
+    {
+        $this->unshiftInQuery("SET FOREIGN_KEY_CHECKS=0;");
+
+        if (is_callable($callback)) {
+            $callback();
+        }
+
+        $this->appendToQuery("SET FOREIGN_KEY_CHECKS=1;");
+    }
+
+    /**
      * return the saved items.
      *
      * @return array
@@ -388,5 +468,17 @@ abstract class BaseHelper
     public function done()
     {
         return $this->getSavedItems();
+    }
+
+    /**
+     * fetch all database tables.
+     *
+     * @author karam mustafa
+     */
+    public function getAllTablesFromDatabase()
+    {
+        $this->setSavedItems(DB::select('SHOW TABLES'));
+
+        return $this;
     }
 }
