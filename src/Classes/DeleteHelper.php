@@ -90,5 +90,4 @@ class DeleteHelper extends BaseHelper
 
         return $this;
     }
-
 }

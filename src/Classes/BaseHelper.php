@@ -176,10 +176,11 @@ abstract class BaseHelper
         $this->loopThrough(
             $this->getAllTablesFromDatabase()->getSavedItems(),
             function ($key, $item) use ($columnName) {
-                if (!in_array($item->$columnName, $this->ignoredTables)) {
+                if (! in_array($item->$columnName, $this->ignoredTables)) {
                     $this->setTables($item->$columnName);
                 }
-            });
+            }
+        );
 
         return $this;
     }
@@ -318,13 +319,13 @@ abstract class BaseHelper
      */
     public function checkIfQueryAllowed($ids, $callbackIfPassed = null, $chunkCountAllowed = null)
     {
-        if (!isset($chunckCountAllowed)) {
+        if (! isset($chunckCountAllowed)) {
             $chunkCountAllowed = $this->getAllowedWhereInQueryNumber();
         }
 
         $items = [];
         $lists = collect($ids)->chunk($chunkCountAllowed + 1);
-        if (!is_null($callbackIfPassed)) {
+        if (! is_null($callbackIfPassed)) {
             foreach ($lists as $index => $list) {
                 $items[] = $callbackIfPassed($list, $index);
             }
@@ -381,7 +382,6 @@ abstract class BaseHelper
             });
 
             return $this;
-
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
