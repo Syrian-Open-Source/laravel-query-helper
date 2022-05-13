@@ -163,6 +163,22 @@ abstract class BaseHelper
     }
 
     /**
+     * @return BaseHelper
+     */
+    public function setAllTablesFromDatabase()
+    {
+        $columnName = 'Tables_in_'.env('DB_DATABASE');
+
+        $this->loopThrough(
+            $this->getAllTablesFromDatabase()->getSavedItems(),
+            function ($key, $item) use ($columnName) {
+            $this->setTables($item->$columnName);
+        });
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getQuery()
@@ -354,7 +370,7 @@ abstract class BaseHelper
     public function executeWithoutPrepare()
     {
         try {
-            $this->executeAll(function (){
+            $this->executeAll(function () {
                 DB::unprepared($this->getQuery());
             });
 
@@ -456,5 +472,7 @@ abstract class BaseHelper
     public function getAllTablesFromDatabase()
     {
         $this->setSavedItems(DB::select('SHOW TABLES'));
+
+        return $this;
     }
 }
