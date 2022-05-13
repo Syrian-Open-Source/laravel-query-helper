@@ -34,6 +34,10 @@ abstract class BaseHelper
      * @var int
      */
     private $allowedWhereInQueryNumber = 0;
+    /**
+     * @var array
+     */
+    private $ignoredTables = ['migrations' , 'password_resets' , 'failed_jobs'];
 
     /**
      * @return int
@@ -172,8 +176,10 @@ abstract class BaseHelper
         $this->loopThrough(
             $this->getAllTablesFromDatabase()->getSavedItems(),
             function ($key, $item) use ($columnName) {
-            $this->setTables($item->$columnName);
-        });
+                if (!in_array($item->$columnName, $this->ignoredTables)) {
+                    $this->setTables($item->$columnName);
+                }
+            });
 
         return $this;
     }
