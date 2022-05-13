@@ -345,6 +345,27 @@ abstract class BaseHelper
     }
 
     /**
+     * execute query statements without preparing them.
+     *
+     * @return BaseHelper
+     * @throws \Exception
+     * @author karam mustafa
+     */
+    public function executeWithoutPrepare()
+    {
+        try {
+            $this->executeAll(function (){
+                DB::unprepared($this->getQuery());
+            });
+
+            return $this;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
+    /**
      * clear all inserted data in class properties.
      * this function ignore the savedDataItems property,
      * because this package designed to be a strong declarative concept,
