@@ -358,8 +358,6 @@ abstract class BaseHelper
                 DB::unprepared($this->getQuery());
             });
 
-            $this->setSavedItems($this->getQuery());
-
             return $this;
 
         } catch (\Exception $e) {
