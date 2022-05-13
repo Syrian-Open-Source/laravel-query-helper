@@ -345,7 +345,7 @@ abstract class BaseHelper
     }
 
     /**
-     * execute query statements without preparing them.
+     * execute query statements without preparing them, this will help us ignore the laravel query preparing.
      *
      * @return BaseHelper
      * @throws \Exception
@@ -357,6 +357,8 @@ abstract class BaseHelper
             $this->executeAll(function (){
                 DB::unprepared($this->getQuery());
             });
+
+            $this->setSavedItems($this->getQuery());
 
             return $this;
 
