@@ -179,6 +179,14 @@ abstract class BaseHelper
     }
 
     /**
+     * @param  string  $query
+     */
+    protected function appendToQuery($query)
+    {
+        $this->query .= $query;
+    }
+
+    /**
      * @return array
      * @author karam mustafa
      */
