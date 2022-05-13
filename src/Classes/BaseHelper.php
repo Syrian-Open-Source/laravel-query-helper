@@ -447,4 +447,14 @@ abstract class BaseHelper
     {
         return $this->getSavedItems();
     }
+
+    /**
+     * fetch all database tables.
+     *
+     * @author karam mustafa
+     */
+    public function getAllTablesFromDatabase()
+    {
+        $this->setSavedItems(DB::select('SHOW TABLES'));
+    }
 }
