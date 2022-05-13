@@ -34,6 +34,23 @@ class DeleteHelper extends BaseHelper
     }
 
     /**
+     * truncate multiple tables by their names in the database
+     *
+     * @return DeleteHelper
+     * @author karam mustafa
+     */
+    public function truncateMultiTables()
+    {
+        $this->disableAndEnableForeignChecks(function () {
+            foreach ($this->tables as $index => $table) {
+                $this->appendToQuery("TRUNCATE $table;");
+            }
+        });
+
+        return $this;
+    }
+
+    /**
      * this function is divide the process of deleting data into a number of queries,
      * instead of making a large query that may take longer.
      * and you can dump the index for each iteration in the checkIfQueryAllowed function.
@@ -68,26 +85,10 @@ class DeleteHelper extends BaseHelper
      */
     public function prepareDataBaseTablesToDrop()
     {
-        $this->getAllTablesFromDatabase();
-
-        $columnName = 'Tables_in_'.env('DB_DATABASE');
-
-        foreach ($this->getSavedItems() as $table) {
-            $this->setTables($table->$columnName);
-        }
-
-        $this->dropMultiTables();
+        $this->getAllTablesFromDatabase()
+            ->dropMultiTables();
 
         return $this;
     }
 
-    /**
-     * fetch all database tables.
-     *
-     * @author karam mustafa
-     */
-    private function getAllTablesFromDatabase()
-    {
-        $this->setSavedItems(DB::select('SHOW TABLES'));
-    }
 }
