@@ -187,6 +187,16 @@ abstract class BaseHelper
     }
 
     /**
+     * set the query string in the first of strings.
+     *
+     * @param  string  $query
+     */
+    protected function unshiftInQuery($query)
+    {
+        $this->query = $query." ".$this->query;
+    }
+
+    /**
      * @return array
      * @author karam mustafa
      */
@@ -286,13 +296,13 @@ abstract class BaseHelper
      */
     public function checkIfQueryAllowed($ids, $callbackIfPassed = null, $chunkCountAllowed = null)
     {
-        if (! isset($chunckCountAllowed)) {
+        if (!isset($chunckCountAllowed)) {
             $chunkCountAllowed = $this->getAllowedWhereInQueryNumber();
         }
 
         $items = [];
         $lists = collect($ids)->chunk($chunkCountAllowed + 1);
-        if (! is_null($callbackIfPassed)) {
+        if (!is_null($callbackIfPassed)) {
             foreach ($lists as $index => $list) {
                 $items[] = $callbackIfPassed($list, $index);
             }
@@ -385,6 +395,25 @@ abstract class BaseHelper
         foreach ($arr as $key => $value) {
             $callback($key, $value);
         }
+    }
+
+    /**
+     * loop through specific array and each iteration will execute by a callback.
+     *
+     * @param  callable  $callback
+     *
+     * @return void
+     * @author karam mustafa
+     */
+    protected function disableAndEnableForeignChecks($callback)
+    {
+        $this->unshiftInQuery("SET FOREIGN_KEY_CHECKS=0;");
+
+        if (is_callable($callback)) {
+            $callback();
+        }
+
+        $this->appendToQuery("SET FOREIGN_KEY_CHECKS=1;");
     }
 
     /**
