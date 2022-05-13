@@ -1,6 +1,6 @@
 Delete helper
 -----------
-#### drop multi tables
+### drop multi tables
 Suppose you want to drop multiple tables by their names in the database, you can do it with the following implementation.
 ```php
 
@@ -13,7 +13,7 @@ Suppose you want to drop multiple tables by their names in the database, you can
         ->executeAll();
 
 ```
-#### truncate multi tables
+### truncate multi tables
 
 Suppose you want to truncate multiple tables by their names in the database, you can do it with the following implementation.
 ```php
@@ -28,7 +28,7 @@ Suppose you want to truncate multiple tables by their names in the database, you
 
 ```
 
-#### delete large data
+### delete large data
 If you have a table that contains a large number of data (maybe millions of records)
 and you want to delete everything contained in this table,
 if you execute the command with one query,
@@ -52,7 +52,7 @@ so this function divides the large query into more queries with an easy-to-use s
         }); //  this will implement the delete process only on the result of this callback.
 ```
 
-#### drop all tables
+### drop all tables
 If you want to drop all tables from the database.
 ```php
 
